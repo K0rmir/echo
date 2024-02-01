@@ -3,6 +3,7 @@ import { sql } from "@vercel/postgres";
 import Link from "next/link";
 
 export default async function Feed() {
+  "use server";
   const { userId } = auth();
 
   const profileRes = await sql`SELECT * FROM profiles
