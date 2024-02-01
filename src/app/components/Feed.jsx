@@ -16,8 +16,8 @@ export default async function Feed() {
       <div id="feedArea">
         {posts.rows.map((posts) => {
           return (
-            <div id="postCard">
-              <Link href={`/posts/${posts.id}`} key={posts.id}>
+            <div id="postCard" key={posts.id}>
+              <Link href={`/posts/${posts.id}`}>
                 <h3>{profile_username}</h3>
                 <p>{posts.post_content}</p>
               </Link>
