@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS profiles (
   id SERIAL PRIMARY KEY,
-  clark_user_id VARCHAR(255),
+  clerk_user_id VARCHAR(255),
   username VARCHAR (255)
 )
 
