@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { ClerkProvider, auth } from "@clerk/nextjs";
+import { ClerkProvider, SignIn, auth } from "@clerk/nextjs";
 // import { db } from "@/lib/db";
 import { sql } from "@vercel/postgres";
 import Header from "@/app/components/Header";
@@ -25,7 +25,8 @@ export default async function RootLayout({ children }) {
         <body className={inter.className}>
           <Header></Header>
           {profileResponse.rowCount !== 0 && children}
-          {profileResponse.rowCount === 0 && <CreateProfile />}
+          {profileResponse.rowCount === 0 && userId && <CreateProfile />}
+          {!userId && <SignIn />}
         </body>
       </html>
     </ClerkProvider>
