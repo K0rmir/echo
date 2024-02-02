@@ -2,7 +2,7 @@
 
 import { sql } from "@vercel/postgres";
 import { Revalidate } from "next/dist/server/lib/revalidate";
-import { Redirect } from "next";
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
 import NewCommentForm from "@/app/components/newCommentForm";
 
