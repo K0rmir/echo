@@ -18,9 +18,9 @@ export default async function NewCommentForm({ params }) {
 
     await sql`INSERT INTO comments (comment_content, posts_id, profiles_id)
         VALUES (${commentContent}, ${params.id}, ${profile_id})`;
-  }
 
-  revalidatePath(`/posts/${params.id}`);
+    revalidatePath(`/posts/${params.id}`);
+  }
 
   return (
     <div id="commentFormContainer">

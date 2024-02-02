@@ -16,7 +16,10 @@ export default async function individualPost({ params }) {
   const posts = await sql`SELECT * FROM posts  
   WHERE posts.id = ${params.id}`;
 
-  //   db query here to GET all entries from comments table.
+  //   db query to GET all comments from comments table.
+
+  const comments = await sql`SELECT * from comments
+  WHERE posts_id = ${params.id}`;
 
   return (
     <div id="individualPostContainer">
@@ -27,6 +30,14 @@ export default async function individualPost({ params }) {
       <div id="commentsArea">
         <NewCommentForm params={params} />
         {/* map here to map through comments */}
+        {comments.rows.map((comments) => {
+          return (
+            <div id="commentCard" key={comments.id}>
+              <h3>{profile_username}</h3>
+              <p>{comments.comment_content}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
