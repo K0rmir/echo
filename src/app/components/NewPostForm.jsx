@@ -17,10 +17,11 @@ export default async function NewPostForm() {
   // function to add new posts //
   async function handleAddPost(formData) {
     "use server";
+    const postTitle = formData.get("title");
     const postContent = formData.get("content");
 
-    await sql`INSERT INTO posts (post_content, user_id)
-    VALUES (${postContent}, ${profile_id})`;
+    await sql`INSERT INTO posts (post_title, post_content, user_id)
+    VALUES (${postTitle}, ${postContent}, ${profile_id})`;
 
     revalidatePath("/");
   }
@@ -28,12 +29,20 @@ export default async function NewPostForm() {
   return (
     <div id="formContainer">
       <form action={handleAddPost}>
+        <input
+          name="title"
+          id="title"
+          type="text"
+          placeholder="Title your sentiment"
+          required
+        />
         <textarea
           name="content"
           id="content"
           cols="100"
           rows="5"
-          placeholder="Share a sentiment..."
+          placeholder="Detail your sentiment..."
+          required
         ></textarea>
         <AddNewPostToast />
       </form>

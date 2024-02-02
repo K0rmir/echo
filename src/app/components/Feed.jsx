@@ -15,7 +15,7 @@ export default async function Feed() {
   const profile_username = profileRes.rows[0].username;
 
   const posts =
-    await sql`SELECT posts.id AS post_id, profiles.username, posts.post_content, profiles.id AS profile_id FROM posts
+    await sql`SELECT posts.id AS post_id, profiles.username, posts.post_title, posts.post_content, profiles.id AS profile_id FROM posts
   JOIN profiles ON posts.user_id = profiles.id`;
 
   // console.log(posts.rows);
@@ -27,8 +27,9 @@ export default async function Feed() {
           return (
             <div id="postCard" key={post.post_id}>
               <Link href={`/posts/${post.post_id}`}>
-                <h4>{post.post_content}</h4>
+                <h3>{post.post_title}</h3>
               </Link>
+              <h4>{post.post_content}</h4>
               <p>
                 sentiment by{" "}
                 <Link href={`/userprofile/${post.profile_id}`}>

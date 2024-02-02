@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS profiles (
 
 CREATE TABLE IF NOT EXISTS posts (
   id SERIAL PRIMARY KEY,
+  post_title VARCHAR(255),
   post_content VARCHAR(255),
   user_id INTEGER REFERENCES profiles(id)  
 )
