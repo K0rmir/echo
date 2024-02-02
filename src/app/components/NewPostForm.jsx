@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { sql } from "@vercel/postgres";
 import { auth } from "@clerk/nextjs";
 import "@/app/styles/newpostform.css";
+import AddNewPostFormBtn from "@/app/components/AddNewPostFormBtn";
 
 export default async function NewPostForm() {
   const { userId } = auth();
@@ -27,8 +28,14 @@ export default async function NewPostForm() {
   return (
     <div id="formContainer">
       <form action={handleAddPost}>
-        <textarea name="content" id="content" cols="100" rows="5"></textarea>
-        <button>Submit</button>
+        <textarea
+          name="content"
+          id="content"
+          cols="100"
+          rows="5"
+          placeholder="Share a sentiment..."
+        ></textarea>
+        <AddNewPostFormBtn />
       </form>
     </div>
   );
