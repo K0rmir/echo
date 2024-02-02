@@ -4,7 +4,7 @@ import * as React from "react";
 import * as Toast from "@radix-ui/react-toast";
 import { useFormStatus } from "react-dom";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
-import "@/app/styles/addnewcommenttoast.css";
+import "@/app/styles/addnewposttoast.css";
 
 const ToastDemo = () => {
   const [open, setOpen] = React.useState(false);
@@ -29,12 +29,12 @@ const ToastDemo = () => {
         type="submit"
         disabled={formStatus.pending}
       >
-        {formStatus.pending ? "Adding thought..." : "Add Thought"}
+        {formStatus.pending ? "Sharing sentiment..." : "Share Sentiment"}
       </button>
 
       <Toast.Root className="ToastRoot" open={open} onOpenChange={setOpen}>
         <Toast.Title className="ToastTitle">
-          Thought added! <CheckCircledIcon />
+          Sentiment shared! <CheckCircledIcon />
         </Toast.Title>
         <Toast.Description asChild>
           Thanks for joining the conversation!
