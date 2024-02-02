@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs";
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
+import "@/app/styles/feedarea.css";
 
 export default async function Feed() {
   "use server";

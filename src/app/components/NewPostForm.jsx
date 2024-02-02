@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { sql } from "@vercel/postgres";
 import { auth } from "@clerk/nextjs";
+import "@/app/styles/newpostform.css";
 
 export default async function NewPostForm() {
   const { userId } = auth();

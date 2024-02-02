@@ -1,0 +1,16 @@
+#feedArea {
+  display: flex;
+  flex-direction: column;
+  background-color: khaki;
+  width: 50%;
+  height: 100vh;
+  margin-left: 25%;
+}
+
+#postCard {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  border: solid 3px black;
+}

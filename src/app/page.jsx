@@ -13,7 +13,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      <h2>This is the HomePage</h2>
+      <h2>This is the HomePage which shows the feed</h2>
 
       <NewPostForm />
       <Feed />
