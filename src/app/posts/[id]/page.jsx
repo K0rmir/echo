@@ -13,19 +13,20 @@ export default async function individualPost({ params }) {
   WHERE clerk_user_id = ${userId}`;
   const profile_username = profileRes.rows[0].username;
 
-  const posts = await sql`SELECT * FROM posts  
+  const post = await sql`SELECT * FROM posts
+  JOIN profiles ON posts.user_id = profiles.id
   WHERE posts.id = ${params.id}`;
 
   //   db query to GET all comments from comments table.
-
   const comments = await sql`SELECT * from comments
+  JOIN profiles ON profiles_id = profiles.id
   WHERE posts_id = ${params.id}`;
 
   return (
     <div id="individualPostContainer">
       <div id="individualPostContent">
-        <h3 className="username">{profile_username}</h3>
-        <p className="content">{posts.rows[0].post_content}</p>
+        <h3 className="username">{post.rows[0].username}</h3>
+        <p className="content">{post.rows[0].post_content}</p>
       </div>
       <div id="commentsArea">
         <NewCommentForm params={params} />
@@ -33,7 +34,7 @@ export default async function individualPost({ params }) {
         {comments.rows.map((comments) => {
           return (
             <div id="commentCard" key={comments.id}>
-              <h3>{profile_username}</h3>
+              <h3>{comments.username}</h3>
               <p>{comments.comment_content}</p>
             </div>
           );
