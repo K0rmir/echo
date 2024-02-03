@@ -1,14 +1,14 @@
 // This is the form for adding new posts to the sentiments page //
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { sql } from "@vercel/postgres";
-import { auth } from "@clerk/nextjs";
+import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
+import {sql} from "@vercel/postgres";
+import {auth} from "@clerk/nextjs";
 import "@/app/styles/newpostform.css";
 import AddNewPostToast from "@/app/components/AddNewPostToast";
 
 export default async function NewPostForm() {
-  const { userId } = auth();
+  const {userId} = auth();
   // get the row in the db where userId is the clerk_user_id
   const profileRes = await sql`SELECT * FROM profiles 
   WHERE clerk_user_id = ${userId}`;
@@ -28,22 +28,22 @@ export default async function NewPostForm() {
 
   return (
     <div id="formContainer">
+      <p>Add New Sentiment</p>
       <form action={handleAddPost}>
-        <input
-          name="title"
-          id="title"
-          type="text"
-          placeholder="Title your sentiment"
-          required
-        />
+        <label className="formLabel" htmlFor="title">
+          Title
+        </label>
+        <input className="input" name="title" id="title" type="text" required />
+        <label className="formLabel textAreaLabel" htmlFor="content">
+          Write your sentiment
+        </label>
         <textarea
+          className="textarea"
           name="content"
           id="content"
-          cols="100"
-          rows="5"
-          placeholder="Detail your sentiment..."
-          required
-        ></textarea>
+          cols="50"
+          rows="10"
+          required></textarea>
         <AddNewPostToast />
       </form>
     </div>

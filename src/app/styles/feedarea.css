@@ -1,10 +1,10 @@
 #feedArea {
   display: flex;
   flex-direction: column;
-  background-color: khaki;
+  /* background-color: khaki; */
   width: 50%;
   height: 100vh;
-  margin-left: 25%;
+  /* margin-left: 25%; */
 }
 
 #postCard {

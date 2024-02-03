@@ -1,5 +1,86 @@
+@import '@radix-ui/colors/black-alpha.css';
+
+input,
+textarea,
+button {
+  all: unset;
+  box-sizing: border-box;
+}
+
 #formContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  background-color: #eceeec;
+  border-radius: 10px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  height: max-content;
+  width: max-content;
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+}
+
+#formContainer form {
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  padding-top: 5px;
+}
+
+#formContainer input,textarea {
+  width: 100%;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  color: black;
+  background-color: #ECEEEC;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7)
+}
+
+.input { 
+  height: 25px;
+}
+
+.textarea {
+  resize: none;
+  margin-bottom: 15px;
+}
+
+.formLabel {
+font-size: 20px;
+font-weight: 500;
+padding: 0;
+}
+
+.textAreaLabel {
+  margin-top: 10px;  
+}
+
+.input:hover,
+.textarea:hover {
+  box-shadow: 0 0 0 2px black;
+}
+.input:focus,
+.textarea:focus {
+  box-shadow: 0 0 0 2px black;
+}
+.input::selection,
+.textarea::selection {
+  background-color: var(--black-a9);
+  color: black;
+}
+
+#formContainer p {
+  margin: 5px;
+  margin-left: 15px;
+  font-size: 25px;
+  align-self: center;
+
 }

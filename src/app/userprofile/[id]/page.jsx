@@ -14,6 +14,14 @@ export default async function UserProfile({params}) {
   JOIN profiles ON posts.user_id = profiles.id
   WHERE profiles.id = ${params.id}`;
 
+  const commentRes = await sql`SELECT posts_id FROM comments`;
+  const commentNum = new Map();
+  for (const comment of commentRes.rows) {
+    const postId = comment.posts_id;
+    commentNum.set(postId, (commentNum.get(postId) || 0) + 1);
+  }
+  const commentNumObject = Object.fromEntries(commentNum);
+
   return (
     <div id="userProfileArea">
       <div className="userProfileInfo">
@@ -36,6 +44,9 @@ export default async function UserProfile({params}) {
                   {post.username}
                 </Link>
               </p>
+              <div className="postInfo">
+                <p>{commentNumObject[post.post_id] || 0} thoughts</p>
+              </div>
             </div>
           );
         })}
