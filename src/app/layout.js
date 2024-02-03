@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Playfair } from "next/font/google";
 import { ClerkProvider, SignIn, auth } from "@clerk/nextjs";
 // import { db } from "@/lib/db";
 import { sql } from "@vercel/postgres";
@@ -6,11 +6,13 @@ import Header from "@/app/components/Header";
 import CreateProfile from "@/app/components/CreateProfile";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair({ 
+  weight: ['400', '600', '800'],
+  subsets: ["latin"] });
 
 export const metadata = {
   title: "Echo",
-  description: "Pending",
+  description: "A place for sentiments",
 };
 
 export default async function RootLayout({ children }) {
@@ -22,7 +24,7 @@ export default async function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={playfair.className}>
           <Header></Header>
           {profileResponse.rowCount !== 0 && children}
           {profileResponse.rowCount === 0 && userId && <CreateProfile />}
