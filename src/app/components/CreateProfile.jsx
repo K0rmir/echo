@@ -1,19 +1,20 @@
-import { auth } from "@clerk/nextjs";
+import {auth} from "@clerk/nextjs";
 // import { db } from "@/lib/db";
-import { sql } from "@vercel/postgres";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import {sql} from "@vercel/postgres";
+import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
 
 export default function CreatProfile() {
-  const { userId } = auth();
+  const {userId} = auth();
   console.log("WEVLJWELKFVJRLKGB");
 
   async function addNewProfile(formData) {
     "use server";
     const username = formData.get("username");
     const bio = formData.get("bio");
+    const location = formData.get("location");
 
-    await sql`INSERT INTO profiles (clerk_user_id, username, bio) VALUES (${userId}, ${username}, ${bio})`;
+    await sql`INSERT INTO profiles (clerk_user_id, username, bio, location) VALUES (${userId}, ${username}, ${bio}, ${location})`;
     revalidatePath("/");
     redirect("/");
   }
@@ -25,6 +26,13 @@ export default function CreatProfile() {
           name="username"
           type="text"
           placeholder="What do you like to be known as?"
+          required
+        />
+        <input
+          name="location"
+          type="text"
+          placeholder="What country or city do you live in?"
+          required
         />
         <textarea
           name="bio"
@@ -32,7 +40,7 @@ export default function CreatProfile() {
           rows="10"
           type="text"
           placeholder="Tell us about yourself..."
-        ></textarea>
+          required></textarea>
         <button>Submit</button>
       </form>
     </div>

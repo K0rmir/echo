@@ -1,12 +1,12 @@
 // This is the profiles page for individual users when their username is clicked from anywhere on the site //
 
-import { sql } from "@vercel/postgres";
+import {sql} from "@vercel/postgres";
 import Link from "next/link";
 import "@/app/styles/userprofile.css";
 
-export default async function UserProfile({ params }) {
+export default async function UserProfile({params}) {
   const userProfile =
-    await sql`SELECT profiles.id, profiles.username, profiles.bio FROM profiles
+    await sql`SELECT profiles.id, profiles.username, profiles.bio, profiles.location FROM profiles
     WHERE profiles.id = ${params.id}`;
 
   const userPosts =
@@ -14,13 +14,11 @@ export default async function UserProfile({ params }) {
   JOIN profiles ON posts.user_id = profiles.id
   WHERE profiles.id = ${params.id}`;
 
-  console.table(userPosts.rows);
-
   return (
     <div id="userProfileArea">
       <div className="userProfileInfo">
         <h3>{userProfile.rows[0].username}</h3>
-        <p>Location :</p>
+        <p>Location: {userProfile.rows[0].location}</p>
         <p>About:</p>
         <p>{userProfile.rows[0].bio}</p>
       </div>

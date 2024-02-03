@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS profiles (
   id SERIAL PRIMARY KEY,
   clerk_user_id VARCHAR(255),
-  username VARCHAR (255)
+  username VARCHAR (255),
+  bio VARCHAR(255),
+  location VARCHAR(255),
 )
 
 CREATE TABLE IF NOT EXISTS posts (

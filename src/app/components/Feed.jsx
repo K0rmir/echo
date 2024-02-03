@@ -1,13 +1,13 @@
 // Feed component for loading all posts on users homepage //
 
-import { auth } from "@clerk/nextjs";
-import { sql } from "@vercel/postgres";
+import {auth} from "@clerk/nextjs";
+import {sql} from "@vercel/postgres";
 import Link from "next/link";
 import "@/app/styles/feedarea.css";
 
 export default async function Feed() {
   "use server";
-  const { userId } = auth();
+  const {userId} = auth();
 
   const profileRes = await sql`SELECT * FROM profiles
   WHERE clerk_user_id = ${userId}`;
@@ -29,7 +29,6 @@ export default async function Feed() {
               <Link href={`/posts/${post.post_id}`}>
                 <h3>{post.post_title}</h3>
               </Link>
-              <h4>{post.post_content}</h4>
               <p>
                 sentiment by{" "}
                 <Link href={`/userprofile/${post.profile_id}`}>
