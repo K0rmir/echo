@@ -44,7 +44,7 @@ export default async function Feed() {
           return (
             <div id="postCard" key={post.post_id}>
               <Link href={`/posts/${post.post_id}`}>
-                <h3>{post.post_title}</h3>
+                <h2>{post.post_title}</h2>
               </Link>
               <p>
                 sentiment by{" "}
