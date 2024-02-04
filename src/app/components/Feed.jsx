@@ -27,7 +27,7 @@ export default async function Feed() {
 
   // This creates a 'Map Object' which is used to store the count of comments for each unique post_id
   const commentNum = new Map();
-  // This for loop iterates over row (as specified by .rows) in the array returned from the SQL query.
+  // This for loop iterates over each row (as specified by .rows) in the array returned from the SQL query.
   // The post_id value is extracted and saved as the const variable 'comment'
   // Then the map is updated. If a post_id already exists as a key in the map, it's value is increased by 1, if the post_id doesn't exist, it is added as a new key with a value of 1.
   for (const comment of commentRes.rows) {
@@ -36,6 +36,15 @@ export default async function Feed() {
   }
   //  This converts the map into a regular objects to make rendering the content easier.
   const commentNumObject = Object.fromEntries(commentNum);
+
+  // These next few lines follow the exact same logic as above for mapping the total number of likes on each post. //
+  const likedRes = await sql`SELECT posts_id FROM comments`;
+  const likedNum = new Map();
+  for (const like of likedRes.rows) {
+    const postId = like.posts_id;
+    likedNum.set(postId, (likedNum.get(postId) || 0) + 1);
+  }
+  const likedNumObject = Object.fromEntries(likedNum);
 
   return (
     <>
@@ -55,7 +64,9 @@ export default async function Feed() {
                 </Link>
               </p>
               <div className="postInfo">
-                {/* likes button here */}
+                <p className="likes">
+                  {likedNumObject[post.post_id] || 0} likes
+                </p>
                 <p className="comments">
                   {commentNumObject[post.post_id] || 0} thoughts
                 </p>
