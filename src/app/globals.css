@@ -5,6 +5,9 @@
 body {
   background: rgb(236,238,236);
 background: radial-gradient(circle, rgba(236,238,236,1) 0%, rgba(40,42,39,1) 26%, rgba(236,238,236,1) 45%);
-/* background-repeat: no-repeat; */
 background-size:cover;
+background-repeat: no-repeat;
+background-position: center;
+background-attachment: fixed;
+min-height: 100%;
 }
