@@ -2,18 +2,21 @@
 
 import {sql} from "@vercel/postgres";
 import Link from "next/link";
+import {revalidatePath} from "next/cache";
 import "@/app/styles/userprofile.css";
 
 export default async function UserProfile({params}) {
+  revalidatePath(`/userprofile/${params.id}`);
+
   const userProfile =
     await sql`SELECT profiles.id, profiles.username, profiles.bio, profiles.location FROM profiles
     WHERE profiles.id = ${params.id}`;
-
+  // posts //
   const userPosts =
     await sql`SELECT posts.id AS post_id, profiles.username, posts.post_title, posts.post_content, profiles.id AS profile_id FROM posts
   JOIN profiles ON posts.user_id = profiles.id
   WHERE profiles.id = ${params.id}`;
-
+  // comments //
   const commentRes = await sql`SELECT posts_id FROM comments`;
   const commentNum = new Map();
   for (const comment of commentRes.rows) {
@@ -21,11 +24,19 @@ export default async function UserProfile({params}) {
     commentNum.set(postId, (commentNum.get(postId) || 0) + 1);
   }
   const commentNumObject = Object.fromEntries(commentNum);
+  // likes //
+  const likedRes = await sql`SELECT post_id FROM posts_likes`;
+  const likedNum = new Map();
+  for (const like of likedRes.rows) {
+    const postId = like.post_id;
+    likedNum.set(postId, (likedNum.get(postId) || 0) + 1);
+  }
+  const likedNumObject = Object.fromEntries(likedNum);
 
   return (
     <div id="userProfileArea">
       <div className="userProfileInfo">
-        <h3>{userProfile.rows[0].username}</h3>
+        <h2>{userProfile.rows[0].username}'s Profile</h2>
         <p>Location: {userProfile.rows[0].location}</p>
         <p>About:</p>
         <p>{userProfile.rows[0].bio}</p>
@@ -37,7 +48,6 @@ export default async function UserProfile({params}) {
               <Link href={`/posts/${post.post_id}`}>
                 <h3>{post.post_title}</h3>
               </Link>
-              <h4>{post.post_content}</h4>
               <p>
                 sentiment by{" "}
                 <Link href={`/userprofile/${post.profile_id}`}>
@@ -45,7 +55,12 @@ export default async function UserProfile({params}) {
                 </Link>
               </p>
               <div className="postInfo">
-                <p>{commentNumObject[post.post_id] || 0} thoughts</p>
+                <p className="likes">
+                  {likedNumObject[post.post_id] || 0} likes
+                </p>
+                <p className="comments">
+                  {commentNumObject[post.post_id] || 0} thoughts
+                </p>
               </div>
             </div>
           );

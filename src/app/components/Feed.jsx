@@ -38,10 +38,10 @@ export default async function Feed() {
   const commentNumObject = Object.fromEntries(commentNum);
 
   // These next few lines follow the exact same logic as above for mapping the total number of likes on each post. //
-  const likedRes = await sql`SELECT posts_id FROM comments`;
+  const likedRes = await sql`SELECT post_id FROM posts_likes`;
   const likedNum = new Map();
   for (const like of likedRes.rows) {
-    const postId = like.posts_id;
+    const postId = like.post_id;
     likedNum.set(postId, (likedNum.get(postId) || 0) + 1);
   }
   const likedNumObject = Object.fromEntries(likedNum);

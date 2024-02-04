@@ -6,8 +6,8 @@ import Feed from "@/app/components/Feed";
 
 // Metadata for browser page title //
 export const metadata = {
-  title: "Sentiments | Echo",
-  description: "Pending",
+  title: "Sentiment Feed | Echo",
+  description: "Share sentiments & Echo others.",
 };
 
 export default function HomePage() {

@@ -13,7 +13,9 @@ export default function Header() {
       </div>
 
       <i>
-        <h1>Echo</h1>
+        <Link href={"/"}>
+          <h1>Echo</h1>
+        </Link>
       </i>
       <p>A place for sentiments</p>
     </header>

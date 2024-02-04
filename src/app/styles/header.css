@@ -27,20 +27,24 @@
   padding: .5rem, .5rem;
 }
 
-
-
 .userBtnContainer {
   display: flex;
   justify-content: right;
   width: fit-content;
   position: absolute;
   right: 0;
-  
-  
-
-
-
 }
+
+#globalHeader a {
+  text-decoration: none;
+  color: black;
+}
+
+#globalHeader a:hover {
+  text-decoration: underline;
+}
+
+
 
 
 
