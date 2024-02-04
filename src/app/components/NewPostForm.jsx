@@ -24,6 +24,7 @@ export default async function NewPostForm() {
     VALUES (${postTitle}, ${postContent}, ${profile_id})`;
 
     revalidatePath("/");
+    revalidatePath(`/userprofile/${profile_id}`);
   }
 
   return (

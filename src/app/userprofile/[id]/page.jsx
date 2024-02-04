@@ -2,12 +2,10 @@
 
 import {sql} from "@vercel/postgres";
 import Link from "next/link";
-import {revalidatePath} from "next/cache";
 import "@/app/styles/userprofile.css";
+import {auth} from "@clerk/nextjs";
 
 export default async function UserProfile({params}) {
-  revalidatePath(`/userprofile/${params.id}`);
-
   const userProfile =
     await sql`SELECT profiles.id, profiles.username, profiles.bio, profiles.location FROM profiles
     WHERE profiles.id = ${params.id}`;

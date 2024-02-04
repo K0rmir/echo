@@ -16,6 +16,7 @@ export default async function individualPost({params}) {
   const profileRes = await sql`SELECT * FROM profiles
   WHERE clerk_user_id = ${userId}`;
   const profile_username = profileRes.rows[0].username;
+  const profile_id = profileRes.rows[0].profile_id;
   // db query to GET all posts from the posts table.
   const post = await sql`SELECT * FROM posts
   JOIN profiles ON posts.user_id = profiles.id
