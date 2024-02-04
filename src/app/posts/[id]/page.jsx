@@ -34,8 +34,6 @@ export default async function individualPost({params}) {
   const likesNum =
     await sql`SELECT * FROM posts_likes WHERE post_id = ${params.id}`;
 
-  console.log(likesNum);
-
   return (
     <div id="individualPostContainer">
       <div id="individualPostContent">
@@ -47,7 +45,7 @@ export default async function individualPost({params}) {
             {post.rows[0].username}
           </Link>
         </p>
-        <div className="postInfo">
+        <div className="individualPostInfo">
           <LikeButton post_id={params.id} />
           <p className="likes">{likesNum.rows.length} likes</p>
           <p className="comments">{commentRes.rows.length || 0} thoughts</p>

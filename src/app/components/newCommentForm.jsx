@@ -3,8 +3,8 @@
 import {Revalidate, revalidatePath} from "next/cache";
 import {sql} from "@vercel/postgres";
 import {auth} from "@clerk/nextjs";
-// import AddNewCommentBtn from "@/app/components/AddNewCommentBtn";
 import AddNewCommentToast from "@/app/components/AddNewCommentToast";
+import "@/app/styles/newcommentform.css";
 
 export default async function NewCommentForm({params}) {
   const {userId} = auth();
@@ -30,8 +30,8 @@ export default async function NewCommentForm({params}) {
         <textarea
           name="content"
           id="content"
-          cols="30"
-          rows="10"
+          cols="55"
+          rows="5"
           required></textarea>
         <AddNewCommentToast />
       </form>
