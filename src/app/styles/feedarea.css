@@ -25,4 +25,24 @@
   width: fit-content;
 }
 
+.comments:hover {
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+#postCard a:hover {
+  text-decoration: underline;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: bisque;
+  gap: 10px;
+}
+
+
+
 

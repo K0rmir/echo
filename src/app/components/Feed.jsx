@@ -48,12 +48,17 @@ export default async function Feed() {
               </Link>
               <p>
                 sentiment by{" "}
-                <Link href={`/userprofile/${post.profile_id}`}>
+                <Link
+                  className="username"
+                  href={`/userprofile/${post.profile_id}`}>
                   {post.username}
                 </Link>
               </p>
               <div className="postInfo">
-                <p>{commentNumObject[post.post_id] || 0} thoughts</p>
+                {/* likes button here */}
+                <p className="comments">
+                  {commentNumObject[post.post_id] || 0} thoughts
+                </p>
               </div>
             </div>
           );
