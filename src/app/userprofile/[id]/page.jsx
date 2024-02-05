@@ -34,7 +34,7 @@ export default async function UserProfile({params}) {
   return (
     <div id="userProfileArea">
       <div className="userProfileInfo">
-        <h2>{userProfile.rows[0].username}'s Profile</h2>
+        <h2>{userProfile.rows[0].username}&apos;s Profile</h2>
         <p>Location: {userProfile.rows[0].location}</p>
         <p>About:</p>
         <p>{userProfile.rows[0].bio}</p>
