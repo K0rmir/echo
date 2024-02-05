@@ -1,13 +1,13 @@
 // Feed component for loading all posts on users homepage //
 
-import {auth} from "@clerk/nextjs";
-import {sql} from "@vercel/postgres";
+import { auth } from "@clerk/nextjs";
+import { sql } from "@vercel/postgres";
 import Link from "next/link";
 import "@/app/styles/feedarea.css";
 
 export default async function Feed() {
   "use server";
-  const {userId} = auth();
+  const { userId } = auth();
 
   // query to get all data from profiles table //
 
@@ -34,6 +34,7 @@ export default async function Feed() {
     const postId = comment.posts_id;
     commentNum.set(postId, (commentNum.get(postId) || 0) + 1);
   }
+
   //  This converts the map into a regular objects to make rendering the content easier.
   const commentNumObject = Object.fromEntries(commentNum);
 
@@ -45,6 +46,8 @@ export default async function Feed() {
     likedNum.set(postId, (likedNum.get(postId) || 0) + 1);
   }
   const likedNumObject = Object.fromEntries(likedNum);
+
+  console.log(likedNumObject);
 
   return (
     <>
@@ -59,7 +62,8 @@ export default async function Feed() {
                 sentiment by{" "}
                 <Link
                   className="username"
-                  href={`/userprofile/${post.profile_id}`}>
+                  href={`/userprofile/${post.profile_id}`}
+                >
                   {post.username}
                 </Link>
               </p>
