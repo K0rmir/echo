@@ -1,7 +1,7 @@
 # Echo
 ## A Social Media Platform 
 
-[Visit the live site here!(https://echo.kormir.dev/)
+[Visit the live site here!](https://echo.kormir.dev/)
 
 Created as my week 9 project for Tech Educators Full Stack Software Development Bootcamp, Echo is a slight tongue in cheeck play on the term 'echo chamber'. This platform enables people to create an account and profile, log in and post sentiments for others to see. 
 
