@@ -29,3 +29,8 @@ CREATE TABLE IF NOT EXISTS posts_likes (
   comment_id INTEGER REFERENCES comments(id)
   
 )
+
+CREATE TABLE IF NOT EXISTS reposts (
+  post_id INTEGER REFERENCES posts(id),
+  user_id INTEGER REFERENCES profiles(id)
+)

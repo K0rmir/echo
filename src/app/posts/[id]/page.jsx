@@ -1,17 +1,18 @@
 // Functionality and rendering for individual posts when clicking through to them to see all comments.
 
-import { sql } from "@vercel/postgres";
-import { Revalidate } from "next/dist/server/lib/revalidate";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs";
+import {sql} from "@vercel/postgres";
+import {Revalidate} from "next/dist/server/lib/revalidate";
+import {redirect} from "next/navigation";
+import {auth} from "@clerk/nextjs";
 import Link from "next/link";
 import NewCommentForm from "@/app/components/newCommentForm";
 import LikeButton from "@/app/components/LikeButton";
+import RepostButton from "@/app/components/RepostButton";
 import "@/app/styles/feedarea.css";
 
-export default async function individualPost({ params }) {
+export default async function individualPost({params}) {
   "use server";
-  const { userId } = auth();
+  const {userId} = auth();
   //  db query to GET all profile info from profiles table.
   const profileRes = await sql`SELECT * FROM profiles
   WHERE clerk_user_id = ${userId}`;
@@ -52,6 +53,7 @@ export default async function individualPost({ params }) {
           <LikeButton post_id={params.id} />
           <p className="likes">{likesNum.rows.length} likes</p>
           <p className="comments">{commentRes.rows.length || 0} thoughts</p>
+          <RepostButton post_id={params.id} />
         </div>
       </div>
       <div id="commentsArea">

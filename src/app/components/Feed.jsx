@@ -1,13 +1,13 @@
 // Feed component for loading all posts on users homepage //
 
-import { auth } from "@clerk/nextjs";
-import { sql } from "@vercel/postgres";
+import {auth} from "@clerk/nextjs";
+import {sql} from "@vercel/postgres";
 import Link from "next/link";
 import "@/app/styles/feedarea.css";
 
 export default async function Feed() {
   "use server";
-  const { userId } = auth();
+  const {userId} = auth();
 
   // query to get all data from profiles table //
 
@@ -47,8 +47,6 @@ export default async function Feed() {
   }
   const likedNumObject = Object.fromEntries(likedNum);
 
-  console.log(likedNumObject);
-
   return (
     <>
       <div id="feedArea">
@@ -62,8 +60,7 @@ export default async function Feed() {
                 sentiment by{" "}
                 <Link
                   className="username"
-                  href={`/userprofile/${post.profile_id}`}
-                >
+                  href={`/userprofile/${post.profile_id}`}>
                   {post.username}
                 </Link>
               </p>
