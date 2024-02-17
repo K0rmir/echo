@@ -3,10 +3,11 @@ import {auth} from "@clerk/nextjs";
 import {sql} from "@vercel/postgres";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
+import "@/app/styles/createprofile.css";
 
 export default function CreatProfile() {
   const {userId} = auth();
-  console.log("WEVLJWELKFVJRLKGB");
+  // console.log("WEVLJWELKFVJRLKGB");
 
   async function addNewProfile(formData) {
     "use server";
@@ -21,6 +22,7 @@ export default function CreatProfile() {
 
   return (
     <div className="createProfileForm">
+      <p>Create Your Profile</p>
       <form action={addNewProfile}>
         <input
           name="username"
