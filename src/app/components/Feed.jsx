@@ -65,22 +65,20 @@ export default async function Feed() {
     <>
       <div id="feedArea">
         {posts.rows.map((post) => {
-          return (
-            <div id="postCard" key={post.post_id}>
-              <Link href={`/posts/${post.post_id}`}>
-                <h2>{post.post_title}</h2>
-              </Link>
-              <p>
-                sentiment by{" "}
-                <Link
-                  className="username"
-                  href={`/userprofile/${post.profile_id}`}>
-                  {post.username}
+          if (post.repost_id === null) {
+            return (
+              <div id="postCard" key={post.post_id}>
+                <Link href={`/posts/${post.post_id}`}>
+                  <h2>{post.post_title}</h2>
                 </Link>
-              </p>
-              {post.repost_id ? (
-                <p>This is a repost.</p>
-              ) : (
+                <p>
+                  sentiment by{" "}
+                  <Link
+                    className="username"
+                    href={`/userprofile/${post.profile_id}`}>
+                    {post.username}
+                  </Link>
+                </p>
                 <div className="postInfo">
                   <p className="likes">
                     {likedNumObject[post.post_id] || 0} likes
@@ -89,11 +87,66 @@ export default async function Feed() {
                     {commentNumObject[post.post_id] || 0} thoughts
                   </p>
                 </div>
-              )}
-            </div>
-          );
+              </div>
+            );
+          } else if (post.repost_id != null) {
+            return (
+              <div id="postCard" key={post.post_id}>
+                <p>THIS IS A REPOST</p>
+                <Link href={`/posts/${post.post_id}`}>
+                  <h2>{post.post_title}</h2>
+                </Link>
+                <p>
+                  sentiment by{" "}
+                  <Link
+                    className="username"
+                    href={`/userprofile/${post.profile_id}`}>
+                    {post.username}
+                  </Link>
+                </p>
+                <div className="postInfo">
+                  <p className="likes">
+                    {likedNumObject[post.post_id] || 0} likes
+                  </p>
+                  <p className="comments">
+                    {commentNumObject[post.post_id] || 0} thoughts
+                  </p>
+                </div>
+              </div>
+            );
+          }
         })}
       </div>
     </>
   );
+}
+
+{
+  /* <div id="feedArea">
+{posts.rows.map((post) => {
+  return (
+    <div id="postCard" key={post.post_id}>
+      <Link href={`/posts/${post.post_id}`}>
+        <h2>{post.post_title}</h2>
+      </Link>
+      <p>
+        sentiment by{" "}
+        <Link
+          className="username"
+          href={`/userprofile/${post.profile_id}`}>
+          {post.username}
+        </Link>
+      </p>
+      <div className="postInfo">
+        <p className="likes">
+          {likedNumObject[post.post_id] || 0} likes
+        </p>
+        <p className="comments">
+          {commentNumObject[post.post_id] || 0} thoughts
+        </p>
+      </div>
+    </div>
+  );
+})}
+</div> */
 }
