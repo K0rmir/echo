@@ -16,8 +16,22 @@ export default async function Feed() {
   const profile_username = profileRes.rows[0].username;
   // query to get data from posts table //
   const posts =
-    await sql`SELECT posts.id AS post_id, profiles.username, posts.post_title, posts.post_content, profiles.id AS profile_id FROM posts
-  JOIN profiles ON posts.user_id = profiles.id`;
+    await sql`SELECT posts.id AS post_id, profiles.username, posts.post_title, posts.post_content, profiles.id AS profile_id, NULL AS repost_id FROM posts
+  JOIN profiles ON posts.user_id = profiles.id
+  UNION ALL
+  
+  SELECT posts.id AS post_id,
+  profiles.username,
+  posts.post_title,
+  posts.post_content,
+  profiles.id AS profile_id,
+  reposts.id AS repost_id
+
+  FROM posts
+  JOIN reposts ON posts.id = reposts.post_id
+  JOIN profiles ON reposts.user_id = profiles.id`;
+
+  console.table(posts.rows);
 
   // query to get comments from comments table and display total comments per post //
   const commentRes = await sql`SELECT posts_id FROM comments`;
@@ -64,14 +78,18 @@ export default async function Feed() {
                   {post.username}
                 </Link>
               </p>
-              <div className="postInfo">
-                <p className="likes">
-                  {likedNumObject[post.post_id] || 0} likes
-                </p>
-                <p className="comments">
-                  {commentNumObject[post.post_id] || 0} thoughts
-                </p>
-              </div>
+              {post.repost_id ? (
+                <p>This is a repost.</p>
+              ) : (
+                <div className="postInfo">
+                  <p className="likes">
+                    {likedNumObject[post.post_id] || 0} likes
+                  </p>
+                  <p className="comments">
+                    {commentNumObject[post.post_id] || 0} thoughts
+                  </p>
+                </div>
+              )}
             </div>
           );
         })}

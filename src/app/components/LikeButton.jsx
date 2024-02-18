@@ -17,8 +17,6 @@ export default async function LikeButton({post_id}) {
   // this checks whether or not the post has been liked //
   const liked = likedRes.rows.length === 0 ? false : true;
 
-  console.log(liked);
-
   async function handleLike() {
     "use server";
 

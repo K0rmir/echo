@@ -23,7 +23,7 @@ export default async function individualPost({params}) {
     await sql`SELECT posts.post_title, posts.post_content, profiles.username, profiles.id AS profile_id  FROM posts
   JOIN profiles ON posts.user_id = profiles.id
   WHERE posts.id = ${params.id}`;
-  console.log(post.rows);
+
   //   db query to GET all comments from comments table.
   const comments =
     await sql`SELECT comments.id, profiles.id AS profile_id, profiles.username, comments.comment_content from comments
