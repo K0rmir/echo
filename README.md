@@ -13,5 +13,5 @@ Users can create their own sentiments, add thoughts (comments) to other sentimen
 - JavaScript
 - CSS
 
-I would like to add the functionality to 'echo' (report) other sentiments in the future.
+I am currently working on implementing a repost feature so that users can "echo" other users sentiments.
 
